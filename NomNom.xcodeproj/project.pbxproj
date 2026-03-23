@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A001 /* NomNomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001 /* NomNomApp.swift */; };
+		A002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B002 /* ContentView.swift */; };
+		A003 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B003 /* HomeView.swift */; };
+		A004 /* DecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B004 /* DecisionView.swift */; };
+		A005 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B005 /* ResultView.swift */; };
+		A006 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B006 /* FlowLayout.swift */; };
+		A007 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B007 /* Restaurant.swift */; };
+		A008 /* DecisionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B008 /* DecisionContext.swift */; };
+		A009 /* RecommendationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B009 /* RecommendationEngine.swift */; };
+		A010 /* DecisionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B010 /* DecisionSession.swift */; };
+		A011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B011 /* Assets.xcassets */; };
+		A012 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012 /* AppViewModel.swift */; };
+		A013 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B013 /* APIModels.swift */; };
+		A014 /* BackendClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B014 /* BackendClient.swift */; };
+		A015 /* BackendConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015 /* BackendConfiguration.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B001 /* NomNomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NomNomApp.swift; sourceTree = "<group>"; };
+		B002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B003 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B004 /* DecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionView.swift; sourceTree = "<group>"; };
+		B005 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		B006 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
+		B007 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		B008 /* DecisionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionContext.swift; sourceTree = "<group>"; };
+		B009 /* RecommendationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationEngine.swift; sourceTree = "<group>"; };
+		B010 /* DecisionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionSession.swift; sourceTree = "<group>"; };
+		B011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B012 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		B013 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		B014 /* BackendClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendClient.swift; sourceTree = "<group>"; };
+		B015 /* BackendConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendConfiguration.swift; sourceTree = "<group>"; };
+		B016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B100 /* NomNom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = NomNom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D000 = {
+			isa = PBXGroup;
+			children = (
+				D100 /* iOSApp */,
+				D200 /* NomNomCore */,
+				D300 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D100 /* iOSApp */ = {
+			isa = PBXGroup;
+			path = iOSApp;
+			sourceTree = SOURCE_ROOT;
+			children = (
+				B001 /* NomNomApp.swift */,
+				B002 /* ContentView.swift */,
+				B012 /* AppViewModel.swift */,
+				D110 /* Views */,
+				D120 /* Networking */,
+				D130 /* Config */,
+				B016 /* Info.plist */,
+				B011 /* Assets.xcassets */,
+			);
+		};
+		D110 /* Views */ = {
+			isa = PBXGroup;
+			path = Views;
+			sourceTree = "<group>";
+			children = (
+				B003 /* HomeView.swift */,
+				B004 /* DecisionView.swift */,
+				B005 /* ResultView.swift */,
+				B006 /* FlowLayout.swift */,
+			);
+		};
+		D120 /* Networking */ = {
+			isa = PBXGroup;
+			path = Networking;
+			sourceTree = "<group>";
+			children = (
+				B013 /* APIModels.swift */,
+				B014 /* BackendClient.swift */,
+			);
+		};
+		D130 /* Config */ = {
+			isa = PBXGroup;
+			path = Config;
+			sourceTree = "<group>";
+			children = (
+				B015 /* BackendConfiguration.swift */,
+			);
+		};
+		D200 /* NomNomCore */ = {
+			isa = PBXGroup;
+			path = Sources/NomNomCore;
+			sourceTree = SOURCE_ROOT;
+			children = (
+				B007 /* Restaurant.swift */,
+				B008 /* DecisionContext.swift */,
+				B009 /* RecommendationEngine.swift */,
+				B010 /* DecisionSession.swift */,
+			);
+		};
+		D300 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B100 /* NomNom.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E001 /* NomNom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F100 /* Build configuration list for PBXNativeTarget "NomNom" */;
+			buildPhases = (
+				C010 /* Sources */,
+				C001 /* Frameworks */,
+				C011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NomNom;
+			productName = NomNom;
+			productReference = B100 /* NomNom.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					E001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = F200 /* Build configuration list for PBXProject "NomNom" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D000;
+			productRefGroup = D300 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E001 /* NomNom */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A011 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C010 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A001 /* NomNomApp.swift in Sources */,
+				A002 /* ContentView.swift in Sources */,
+				A003 /* HomeView.swift in Sources */,
+				A004 /* DecisionView.swift in Sources */,
+				A005 /* ResultView.swift in Sources */,
+				A006 /* FlowLayout.swift in Sources */,
+				A007 /* Restaurant.swift in Sources */,
+				A008 /* DecisionContext.swift in Sources */,
+				A009 /* RecommendationEngine.swift in Sources */,
+				A010 /* DecisionSession.swift in Sources */,
+				A012 /* AppViewModel.swift in Sources */,
+				A013 /* APIModels.swift in Sources */,
+				A014 /* BackendClient.swift in Sources */,
+				A015 /* BackendConfiguration.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iOSApp/Info.plist;
+
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openai.nomnom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iOSApp/Info.plist;
+
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openai.nomnom;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		F201 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F202 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F100 /* Build configuration list for PBXNativeTarget "NomNom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F101 /* Debug */,
+				F102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F200 /* Build configuration list for PBXProject "NomNom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F201 /* Debug */,
+				F202 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F000 /* Project object */;
+}
