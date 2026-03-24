@@ -2,7 +2,7 @@ import Foundation
 
 enum BackendConfiguration {
     static let userDefaultsKey = "nomnom.baseURL"
-    static let defaultBaseURLString = "http://127.0.0.1:8080"
+    static let defaultBaseURLString = "http://127.0.0.1:8081"
 
     static func loadBaseURL() -> String {
         let stored = UserDefaults.standard.string(forKey: userDefaultsKey)?.trimmingCharacters(in: .whitespacesAndNewlines)

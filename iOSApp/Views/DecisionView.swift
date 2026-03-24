@@ -1,131 +1,110 @@
 import SwiftUI
 
 struct DecisionView: View {
-    let viewModel: AppViewModel
+    @ObservedObject var viewModel: AppViewModel
     let onFinished: () -> Void
 
     var body: some View {
         Group {
             if let matchup = viewModel.currentMatchup {
                 ScrollView {
-                    VStack(spacing: 18) {
-                        Text("选出今晚最想去的一家")
-                            .font(.title2.bold())
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(alignment: .leading, spacing: 18) {
+                        Text("留下今晚最想去的一家")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
 
-                        RestaurantDecisionCard(title: "左边", card: matchup.left) {
+                        MatchupCard(title: "左边", venue: matchup.left, isVoting: viewModel.isVoting) {
                             Task {
-                                await viewModel.choose(.left)
+                                await viewModel.choose(matchup.left.venueId)
                                 if viewModel.result != nil { onFinished() }
                             }
                         }
 
-                        RestaurantDecisionCard(title: "右边", card: matchup.right) {
+                        MatchupCard(title: "右边", venue: matchup.right, isVoting: viewModel.isVoting) {
                             Task {
-                                await viewModel.choose(.right)
+                                await viewModel.choose(matchup.right.venueId)
                                 if viewModel.result != nil { onFinished() }
                             }
                         }
 
                         if !viewModel.history.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("已做出的选择")
+                                Text("已完成的对战")
                                     .font(.headline)
                                 ForEach(viewModel.history) { record in
-                                    Text("• \(record.leftRestaurantName) vs \(record.rightRestaurantName) → 你选了 \(record.winnerRestaurantName)")
+                                    Text("第 \(record.round) 轮 · 胜者 \(shortName(for: record.winnerVenueId))")
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                 }
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(16)
+                            .background(Color.white.opacity(0.78), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                         }
                     }
                     .padding(20)
                 }
-                .background(Color(.systemGroupedBackground))
-            } else if viewModel.isLoading {
-                ProgressView("等待后端返回下一轮对战…")
+                .background(
+                    LinearGradient(
+                        colors: [Color(red: 0.97, green: 0.94, blue: 0.88), Color(red: 0.92, green: 0.95, blue: 0.98)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            } else if viewModel.isVoting {
+                ProgressView("正在提交你的选择…")
             } else {
-                ProgressView("等待决策数据…")
+                ProgressView("等待后端返回对战数据…")
             }
         }
         .navigationTitle("两两 PK")
     }
+
+    private func shortName(for venueId: UUID) -> String {
+        viewModel.candidateVenue(for: venueId)?.name ?? (String(venueId.uuidString.prefix(6)) + "…")
+    }
 }
 
-private struct RestaurantDecisionCard: View {
+private struct MatchupCard: View {
     let title: String
-    let card: RestaurantCardDTO
-    let action: () -> Void
+    let venue: DecisionVenueSummaryDTO
+    let isVoting: Bool
+    let chooseAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(title)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(card.restaurant.name)
-                        .font(.title3.bold())
-                    Text("\(card.restaurant.cuisine) · \(card.restaurant.neighborhood)")
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 6) {
-                    Label("¥\(card.restaurant.averagePrice)", systemImage: "yensign.circle")
-                    Label("\(card.restaurant.distanceMeters)m", systemImage: "location")
-                    Label(String(format: "%.1f", card.restaurant.rating), systemImage: "star.fill")
-                        .foregroundStyle(.orange)
-                }
-                .font(.subheadline)
-            }
-
-            VStack(alignment: .leading, spacing: 10) {
-                Text("推荐理由")
-                    .font(.headline)
-                FlowLayout(items: card.snapshot.reasons)
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("AI 一句话简介")
-                    .font(.headline)
-                Text(card.snapshot.summary)
-                    .font(.subheadline)
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Text(title)
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
+                Spacer()
+                statusBadge
             }
 
-            VStack(alignment: .leading, spacing: 8) {
-                Text("评论摘要")
-                    .font(.headline)
-                summaryRow(title: "大家常夸", icon: "hand.thumbsup.fill", items: card.snapshot.pros, tint: .green)
-                summaryRow(title: "常见提醒", icon: "exclamationmark.triangle.fill", items: card.snapshot.cons, tint: .orange)
+            Text(venue.name)
+                .font(.title3.bold())
+            HStack(spacing: 14) {
+                Label("¥\(venue.avgPrice)", systemImage: "yensign.circle")
+                Label(String(format: "%.1f", venue.rating), systemImage: "star.fill")
+                    .foregroundStyle(.orange)
             }
+            .font(.subheadline)
 
-            Button(action: action) {
-                if card.restaurant.isOpenNow {
-                    Text("选这家")
-                        .frame(maxWidth: .infinity)
-                } else {
-                    Text("先收藏，还是选这家")
-                        .frame(maxWidth: .infinity)
-                }
+            Button(isVoting ? "提交中…" : "选这家") {
+                chooseAction()
             }
             .buttonStyle(.borderedProminent)
+            .disabled(isVoting)
         }
-        .padding()
-        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .padding(18)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white.opacity(0.82), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
     }
 
-    private func summaryRow(title: String, icon: String, items: [String], tint: Color) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Label(title, systemImage: icon)
-                .foregroundStyle(tint)
-                .font(.subheadline.bold())
-            ForEach(items, id: \.self) { item in
-                Text("• \(item)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        }
+    private var statusBadge: some View {
+        Text(venue.openStatus == "OPEN" ? "营业中" : venue.openStatus == "CLOSED" ? "已打烊" : "状态未知")
+            .font(.caption)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background((venue.openStatus == "OPEN" ? Color.green : Color.orange).opacity(0.12), in: Capsule())
+            .foregroundStyle(venue.openStatus == "OPEN" ? Color.green : Color.orange)
     }
 }

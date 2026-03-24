@@ -1,46 +1,71 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = AppViewModel()
     @State private var path: [AppRoute] = []
-    @State private var viewModel = AppViewModel()
+    @State private var hasBootstrapped = false
 
     var body: some View {
         NavigationStack(path: $path) {
             HomeView(viewModel: viewModel) {
-                Task {
-                    await viewModel.startDecision()
-                    if viewModel.currentMatchup != nil || viewModel.result != nil {
-                        path = [.decision]
-                    }
-                }
+                Task { await startDecisionFlow() }
+            } quickStartAction: {
+                Task { await quickStartFlow() }
             }
             .navigationDestination(for: AppRoute.self) { route in
                 switch route {
                 case .decision:
                     DecisionView(viewModel: viewModel) {
-                        path.append(.result)
+                        path = [.result]
                     }
                 case .result:
                     ResultView(viewModel: viewModel) {
-                        viewModel.reset()
+                        viewModel.resetDecisionFlow()
                         path = []
-                        Task { await viewModel.loadRestaurants() }
                     }
                 }
             }
-            .alert("提示", isPresented: Binding(
-                get: { viewModel.errorMessage != nil },
-                set: { if !$0 { viewModel.errorMessage = nil } }
-            )) {
-                Button("好的", role: .cancel) {}
+            .task {
+                guard !hasBootstrapped else { return }
+                hasBootstrapped = true
+                await viewModel.bootstrap()
+            }
+            .alert("提示", isPresented: errorPresented) {
+                Button("知道了") {
+                    viewModel.errorMessage = nil
+                }
             } message: {
                 Text(viewModel.errorMessage ?? "")
             }
-            .task {
-                if viewModel.restaurants.isEmpty {
-                    await viewModel.loadRestaurants()
+        }
+    }
+
+    private var errorPresented: Binding<Bool> {
+        Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { newValue in
+                if !newValue {
+                    viewModel.errorMessage = nil
                 }
             }
+        )
+    }
+
+    private func startDecisionFlow() async {
+        await viewModel.startDecision()
+        if viewModel.result != nil {
+            path = [.result]
+        } else if viewModel.currentMatchup != nil {
+            path = [.decision]
+        }
+    }
+
+    private func quickStartFlow() async {
+        await viewModel.startDecisionFromSearchResults()
+        if viewModel.result != nil {
+            path = [.result]
+        } else if viewModel.currentMatchup != nil {
+            path = [.decision]
         }
     }
 }

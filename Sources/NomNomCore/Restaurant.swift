@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ReviewDigest: Codable, Equatable, Sendable {
+public struct ReviewDigest: Codable, Equatable, Hashable, Sendable {
     public let bestFor: [String]
     public let pros: [String]
     public let cons: [String]
@@ -12,7 +12,7 @@ public struct ReviewDigest: Codable, Equatable, Sendable {
     }
 }
 
-public struct Restaurant: Identifiable, Codable, Equatable, Sendable {
+public struct Restaurant: Identifiable, Codable, Equatable, Hashable, Sendable {
     public let id: UUID
     public let name: String
     public let cuisine: String

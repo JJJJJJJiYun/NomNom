@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RecommendationSnapshot: Codable, Equatable, Sendable {
+public struct RecommendationSnapshot: Codable, Equatable, Hashable, Sendable {
     public let summary: String
     public let reasons: [String]
     public let pros: [String]

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: nomnom-mvp
+  flyway:
+    enabled: ${FLYWAY_ENABLED:false}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/nomnom}
+    username: ${DB_USERNAME:nomnom}
+    password: ${DB_PASSWORD:nomnom}
+
+server:
+  port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+nomnom:
+  poi:
+    provider: ${NOMNOM_POI_PROVIDER:amap}
+    fallback-enabled: ${NOMNOM_POI_FALLBACK_ENABLED:true}
+    amap:
+      base-url: ${AMAP_BASE_URL:https://restapi.amap.com}
+      api-key: ${AMAP_WEB_SERVICE_KEY:}
+    tencent:
+      base-url: ${TENCENT_MAPS_BASE_URL:https://apis.map.qq.com}
+      api-key: ${TENCENT_MAPS_API_KEY:}
+      secret-key: ${TENCENT_MAPS_SECRET_KEY:}
+    baidu:
+      base-url: ${BAIDU_MAPS_BASE_URL:https://api.map.baidu.com}
+      api-key: ${BAIDU_MAPS_API_KEY:}

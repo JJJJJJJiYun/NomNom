@@ -3,5 +3,7 @@ DerivedData/
 .DS_Store
 xcuserdata/
 backend/out/
+backend/target/
 .cache/
 docs/screenshots/*.png
+.env.local
